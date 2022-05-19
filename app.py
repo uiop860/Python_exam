@@ -11,10 +11,10 @@ from sqlalchemy.orm import Session
 # from database import SessionLoca, engine
 
 templates = Jinja2Templates(directory="templates")
-
+# uvicorn app:app --reload
 app = FastAPI()
 
-
+#
 # def get_db():
 #     db = SessionLocal()
 #     try:
@@ -33,6 +33,7 @@ def read_root():
     return {"Hello": "World"}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
+@app.post("/detect")
+def detect_news(request: Request, title: str = Form(...), news: str = Form(...)):
+    new_news = {"title": title, "news": news}
     return {"item_id": item_id, "q": q}
