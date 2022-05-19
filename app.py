@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 # import models
 # from database import SessionLoca, engine
 
-templates = Jinja2Templates(directory="../templates")
+templates = Jinja2Templates(directory="templates")
 
 app = FastAPI()
 
