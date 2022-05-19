@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, Request, Form, status
+from prediction import make_prediction
 
 from starlette.responses import RedirectResponse
 from starlette.templating import Jinja2Templates
@@ -32,8 +33,9 @@ def home(request: Request, db: Session = Depends(get_db)):
 
 
 @app.post("/add")
-def add(request: Request, title: str = Form(...), text: str = Form(...), db: Session = Depends(get_db)):
-    new_news = models.News(title=title, text=text)
+async def add(request: Request, title: str = Form(...), text: str = Form(...), db: Session = Depends(get_db)):
+
+    new_news = models.News(title=title, text=text, label=make_prediction(text))
     db.add(new_news)
     db.commit()
 

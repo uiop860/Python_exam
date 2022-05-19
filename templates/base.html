@@ -33,10 +33,15 @@
 
       <hr />
 
-      {% for news in news_list %}
+      {% for news in news_list|reverse %}
       <div class="ui segment">
         <p class="ui big header">{{ news.title }}</p>
         <p>{{ news.text }}</p>
+        {% if 'True' in news.label %}
+        <p>🔥 {{news.label}} 🔥</p>
+        {% else %}
+        <p>💩 {{news.label}} 💩</p>
+        {% endif %}
         <a class="ui red button" href="/delete/{{ news.id }}">Delete</a>
       </div>
       {% endfor %}
