@@ -10,3 +10,4 @@ class News(Base):
     title = Column(String)
     text = Column(String)
     label = Column(String)
+    path = Column(String)

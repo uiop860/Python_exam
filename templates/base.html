@@ -41,8 +41,11 @@
         <p>🔥 {{news.label}} 🔥</p>
         {% else %}
         <p>💩 {{news.label}} 💩</p>
-        {% endif %}
+        {% endif %} {% if news.path != none %} <img src='{{
+        url_for('images',path=news.path ) }}' alt="wordcloud" width="300"
+        height="200" style="margin:0px; padding:0px"/> {% endif %}
         <a class="ui red button" href="/delete/{{ news.id }}">Delete</a>
+        <a class="ui green button" href="/generate/{{news.id}}">Generate</a>
       </div>
       {% endfor %}
     </div>
