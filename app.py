@@ -60,7 +60,8 @@ async def generate (request: Request, news_id: int, db: Session = Depends(get_db
 @app.get("/delete/{news_id}")
 async def delete(background_tasks: BackgroundTasks ,request: Request, news_id: int, db: Session = Depends(get_db)):
     news = db.query(models.News).filter(models.News.id == news_id).first()
-    background_tasks.add_task(remove_file, f'./images/{news.path}')
+    if news.path != None:
+        background_tasks.add_task(remove_file, f'./images/{news.path}')
     db.delete(news)
     db.commit()
 
